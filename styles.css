@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(193, 236, 163);
+  background-color: rgb(153, 107, 87);
   font-family: "Savate", sans-serif;
   text-align: center;
   padding: 1rem;
@@ -8,7 +8,7 @@ body {
 button {
   font-family: "Mono", sans-serif;
   font-size: 20px;
-  background-color: darkgreen;
+  background-color: rgb(85, 54, 36);
   color: white;
   border-radius: 10vw;
   padding: 1vw;
