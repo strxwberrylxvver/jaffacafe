@@ -49,6 +49,38 @@ async function useLocation(lat, lng) {
 function displayCards(cafes) {
   const container = document.querySelector(".cards");
   container.innerHTML = "";
+  cafes.forEach((cafe, i) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "swipe-wrapper";
+    wrapper.style.zIndex = 200 - i;
+
+    var newCards = document.querySelectorAll(".location-card:not(.removed)");
+    var allCards = document.querySelectorAll(".location-card");
+  });
+
+  const card = document.createElement("div");
+  card.className = "location-card";
+
+  const imgUrl = cafe.photos?.[0]?.photo_reference
+    ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cafe.photos[0].photo_reference}&key=${apiKey}`
+    : "https://via.placeholder.com/250x150?text=No+Image";
+
+  const cafeData = {
+    name: cafe.name,
+    place_id: cafe.place_id,
+    photo: imgUrl,
+    rating: cafe.rating || "N/A",
+  };
+  card.innerHTML = `
+    <img src="${imgUrl}" alt="${cafe.name}" />
+    <h3>${cafe.name}</h3>
+    <p>⭐️ Rating: ${cafe.rating || "N/A"}</p>
+    <p><small>Swipe right to save 💖</small></p>
+  `;
+
+  wrapper.appendChild(card);
+  container.appendChild(wrapper);
+
   const hammertime = new Hammer(wrapper);
   hammertime.on("swipeleft", () => {
     wrapper.style.transform = "translateX(-150%) rotate(-15deg)";
@@ -62,38 +94,6 @@ function displayCards(cafes) {
     setTimeout(() => wrapper.remove(), 100);
   });
 }
-
-cafes.forEach((cafe, i) => {
-  const wrapper = document.createElement("div");
-  wrapper.className = "swipe-wrapper";
-  wrapper.style.zIndex = 200 - i;
-
-  var newCards = document.querySelectorAll(".location-card:not(.removed)");
-  var allCards = document.querySelectorAll(".location-card");
-});
-
-const card = document.createElement("div");
-card.className = "location-card";
-
-const imgUrl = cafe.photos?.[0]?.photo_reference
-  ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cafe.photos[0].photo_reference}&key=${apiKey}`
-  : "https://via.placeholder.com/250x150?text=No+Image";
-
-const cafeData = {
-  name: cafe.name,
-  place_id: cafe.place_id,
-  photo: imgUrl,
-  rating: cafe.rating || "N/A",
-};
-card.innerHTML = `
-  <img src="${imgUrl}" alt="${cafe.name}" />
-  <h3>${cafe.name}</h3>
-  <p>⭐️ Rating: ${cafe.rating || "N/A"}</p>
-  <p><small>Swipe right to save 💖</small></p>
-`;
-
-wrapper.appendChild(card);
-container.appendChild(wrapper);
 
 //Saving Cafes//
 
@@ -118,14 +118,14 @@ function showSaved() {
     container.innerHTML = "<p>No saved cafes yet 😢</p>";
     return;
   }
-}
-saved.forEach((cafe) => {
-  const card = document.createElement("div");
-  card.className = "location-card";
-  card.innerHTML = `
+  saved.forEach((cafe) => {
+    const card = document.createElement("div");
+    card.className = "location-card";
+    card.innerHTML = `
           <img src="${cafe.photo}" alt="${cafe.name}" />
           <h3>${cafe.name}</h3>
           <p>⭐️ Rating: ${cafe.rating}</p>
             `;
-  container.appendChild(card);
-});
+    container.appendChild(card);
+  });
+}
