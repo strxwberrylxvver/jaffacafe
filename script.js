@@ -4,7 +4,7 @@ const proxy = "https://cors-anywhere.herokuapp.com";
 
 //Adding Geolocation functionality//
 function getLocation() {
-  const cache = JSON.parse(localStorage.getItem("cachedLocation") || {});
+  const cache = JSON.parse(localStorage.getItem("cachedLocation") || "null") || {};
   const now = Date.now();
 
   if (cache.timestamp && now - cache.timestamp < 10 * 60 * 1000) {
