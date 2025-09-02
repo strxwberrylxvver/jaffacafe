@@ -1,6 +1,6 @@
 const apiKey = "AIzaSyCf-duGxI_5sjkp7B7jhr784RtlyWaB5Jg";
 const useProxy = true;
-const proxy = "https://cors-anywhere.herokuapp.com";
+const proxy = "https://cors-anywhere.herokuapp.com/";
 
 //Adding Geolocation functionality//
 function getLocation() {
