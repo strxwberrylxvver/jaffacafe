@@ -94,3 +94,38 @@ card.innerHTML = `
 
 wrapper.appendChild(card);
 container.appendChild(wrapper);
+
+//Saving Cafes//
+
+function saveCafe(cafeJSON) {
+  const cafe = JSON.parse(cafeJSON);
+  let saved = JSON.parse(localStorage.getItem("savedCafes") || "[]");
+  if (!saved.find((c) => c.place_id === cafe.place_id)) {
+    saved.push(cafe);
+    localStorage.setItem("savedCafes", JSON.stringify(saved));
+    alert(`${cafe.name} saved!`);
+  } else {
+    alert(`${cafe.name} is already saved.`);
+  }
+}
+
+//Show Saved Cafes//
+function showSaved() {
+  const container = document.querySelector(".cards");
+  container.innerHTML = "";
+  const saved = JSON.parse(localStorage.getItem("savedCafes") || "[]");
+  if (saved.length === 0) {
+    container.innerHTML = "<p>No saved cafes yet 😢</p>";
+    return;
+  }
+}
+saved.forEach((cafe) => {
+  const card = document.createElement("div");
+  card.className = "location-card";
+  card.innerHTML = `
+          <img src="${cafe.photo}" alt="${cafe.name}" />
+          <h3>${cafe.name}</h3>
+          <p>⭐️ Rating: ${cafe.rating}</p>
+            `;
+  container.appendChild(card);
+});
