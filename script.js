@@ -41,6 +41,9 @@ function getLocation() {
       console.error("Error fetching Places API:", e);
       alert("Error fetching cafes.");
     }
+    console.log("Fetching URL:", url);
+    console.log("Endpoint URL:", endpoint);
+
   }
 }
 
