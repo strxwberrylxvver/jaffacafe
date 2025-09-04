@@ -28,7 +28,7 @@ function getLocation() {
   // API call
   async function useLocation(lat, lng) {
     const endpoint = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=cafe&key=${apiKey}`;
-    const url = useProxy ? `${proxy}/${endpoint}` : endpoint;
+    const url = useProxy ? proxy + endpoint : endpoint;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -41,9 +41,6 @@ function getLocation() {
       console.error("Error fetching Places API:", e);
       alert("Error fetching cafes.");
     }
-    console.log("Fetching URL:", url);
-    console.log("Endpoint URL:", endpoint);
-
   }
 }
 
