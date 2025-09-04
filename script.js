@@ -1,6 +1,6 @@
 const apiKey = "AIzaSyCf-duGxI_5sjkp7B7jhr784RtlyWaB5Jg";
 const useProxy = true;
-const proxy = "https://cors-anywhere.herokuapp.com";
+const proxy = "https://cors-anywhere.herokuapp.com/";
 
 // Adding Geolocation functionality
 function getLocation() {
@@ -28,7 +28,7 @@ function getLocation() {
   // API call
   async function useLocation(lat, lng) {
     const endpoint = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=cafe&key=${apiKey}`;
-    const url = useProxy ? proxy + endpoint : endpoint;
+    const url = useProxy ? `${proxy}/${endpoint}` : endpoint;
     try {
       const response = await fetch(url);
       const data = await response.json();
