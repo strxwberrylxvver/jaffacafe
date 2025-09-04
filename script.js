@@ -24,25 +24,40 @@ function getLocation() {
       () => alert("Location access denied or unavailable.")
     );
   }
-
-  // API call
-  async function useLocation(lat, lng) {
-    const endpoint = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=cafe&key=${apiKey}`;
-    const url = useProxy ? proxy + endpoint : endpoint;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      if (data.results) {
-        displayCards(data.results);
-      } else {
-        alert("No cafes found.");
-      }
-    } catch (e) {
-      console.error("Error fetching Places API:", e);
-      alert("Error fetching cafes.");
-    }
-  }
 }
+
+// Called from Maps SDK callback in HTML
+function initApp() {
+  console.log("Google Maps SDK loaded");
+  getLocation();
+}
+
+function useLocation(lat, lng) {
+  console.log("Using location:", lat, lng);
+
+  const userLocation = new google.maps.LatLng(lat, lng);
+
+  // Needed by PlacesService, even if not displayed
+  const map = new google.maps.Map(document.createElement("div"));
+
+  const service = new google.maps.places.PlacesService(map);
+
+  const request = {
+    location: userLocation,
+    radius: 1500,
+    type: "cafe"
+  };
+
+  service.nearbySearch(request, (results, status) => {
+    if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+      displayCards(results);
+    } else {
+      console.error("PlacesService error:", status);
+      alert("No cafes found or there was an error.");
+    }
+  });
+}
+
 
 // UI and Animations part
 function displayCards(cafes) {
