@@ -1,10 +1,10 @@
 const apiKey = "AIzaSyCf-duGxI_5sjkp7B7jhr784RtlyWaB5Jg";
 const useProxy = true;
-const proxy = "https://cors-anywhere.herokuapp.com/";
+const proxy = "https://cors-anywhere.herokuapp.com";
 
-//Adding Geolocation functionality//
+//Adding Geolocation functionality
 function getLocation() {
-  const cache = JSON.parse(localStorage.getItem("cachedLocation") || "null") || {};
+  const cache = JSON.parse(localStorage.getItem("cachedLocation") || {});
   const now = Date.now();
 
   if (cache.timestamp && now - cache.timestamp < 10 * 60 * 1000) {
