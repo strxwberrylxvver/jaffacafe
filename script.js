@@ -36,8 +36,10 @@ function getLocation() {
           'X-Requested-With': 'XMLHttpRequest'
         }
       });
-      
+      console.log(url);
+      console.log(response);
       const data = await response.json();
+      console.log(data);
       if (data.results) {
         displayCards(data.results);
       } else {
