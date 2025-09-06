@@ -1,8 +1,8 @@
 # JaffaCafe Finder 🍵
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Tech Stack](https://img.shields.io/badge/Tech-HTML%20|%20CSS%20|%20JavaScript-brightgreen)
-![Live Demo](https://img.shields.io/badge/Live-Demo-blueviolet)
+![License](https://img.shields.io/badge/License-MIT-pink?style=for-the-badge&logo=github)
+![Tech Stack](https://img.shields.io/badge/Tech-HTML_CSS_JavaScript-orange?style=for-the-badge&logo=html5&logoColor=white)
+![Live Demo](https://img.shields.io/badge/Live-Demo-purple?style=for-the-badge&logo=webflow)
 
 A simple web app that helps users find nearby cafes using the **Google Places API**.  
 
@@ -15,7 +15,7 @@ A simple web app that helps users find nearby cafes using the **Google Places AP
 
 ## Demo
 
-[Live Demo](#) _(replace with your GitHub Pages or deployed URL)_
+[Live Demo](#) _(https://strxwberrylxvver.github.io/jaffacafe/)_
 
 ## Installation
 
