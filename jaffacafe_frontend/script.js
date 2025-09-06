@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://localhost:5000/api/cafes"; // change when deployed
+const BACKEND_URL = "https://jaffacafe.onrender.com";
 
 // Get location (with caching)
 function getLocation() {

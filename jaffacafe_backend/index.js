@@ -1,11 +1,18 @@
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import cors from "cors";
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
+
+// Allow frontend (GitHub Pages) to call backend
+app.use(cors({
+  origin: ["https://<your-github-username>.github.io", "http://localhost:5500"], // adjust if needed
+}));
 
 app.get("/api/cafes", async (req, res) => {
   const { lat, lng } = req.query;
@@ -18,8 +25,7 @@ app.get("/api/cafes", async (req, res) => {
     const response = await fetch(endpoint);
     const data = await response.json();
 
-    // photo URLs
-    const cafes = data.results.map((cafe) => {
+    const cafes = data.results.map(cafe => {
       const photoUrl = cafe.photos?.[0]?.photo_reference
         ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cafe.photos[0].photo_reference}&key=${API_KEY}`
         : "https://via.placeholder.com/250x150?text=No+Image";
