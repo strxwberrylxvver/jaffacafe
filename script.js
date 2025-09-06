@@ -1,4 +1,4 @@
-const BACKEND_URL = "https://jaffacafe.onrender.com";
+const BACKEND_URL = "https://jaffacafe.onrender.com/api/cafes";
 
 // Get location (with caching)
 function getLocation() {
