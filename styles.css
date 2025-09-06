@@ -1,51 +1,46 @@
-/* ===============================
-   Body & Fonts
-================================= */
+/* --- Body --- */
 body {
-  background: linear-gradient(135deg, #f9e0d9, #d9c1b3); /* soft pastel gradient */
-  font-family: "Press Start 2P", "Savate", sans-serif; /* retro pixel font */
+  background: linear-gradient(135deg, #f9e0d9 0%, #fff8f0 100%);
+  font-family: "Press Start 2P", sans-serif;
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
   color: #4b3b2a;
+  min-height: 100vh;
+  cursor: pointer;
 }
 
-/* ===============================
-   Buttons
-================================= */
+/* --- Buttons --- */
 button {
-  font-family: "Press Start 2P", "Mono", sans-serif;
+  font-family: "Press Start 2P", monospace;
   font-size: 16px;
-  background: linear-gradient(135deg, #a67c52, #c99c7f);
-  color: #fff;
-  border-radius: 0.5rem;
-  padding: 1rem 2rem;
+  background: linear-gradient(145deg, #8b6e5f, #f2a6a0);
+  color: #fff8f0;
+  border-radius: 1rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
   outline: none;
-  border: 2px solid #8b6e5f;
   cursor: pointer;
-  box-shadow: 4px 4px 0px #8b6e5f; /* retro block shadow */
+  box-shadow: 4px 4px 0 #6b4f3c;
   transition: all 0.2s ease-in-out;
 }
 
 button:hover {
-  background: linear-gradient(135deg, #c99c7f, #a67c52);
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #8b6e5f;
+  transform: scale(1.05);
+  box-shadow: 6px 6px 0 #6b4f3c;
+  background: linear-gradient(145deg, #f2a6a0, #f7d57a);
 }
 
-/* ===============================
-   Cards container
-================================= */
+/* --- Cards Container --- */
 .cards {
   position: relative;
   width: 100%;
   max-width: 320px;
   margin: 2rem auto;
-  height: 420px;
+  height: 450px;
+  perspective: 1000px;
 }
 
-/* ===============================
-   Swipe wrapper
-================================= */
+/* --- Swipe Wrapper --- */
 .swipe-wrapper {
   position: absolute;
   top: 0;
@@ -54,58 +49,50 @@ button:hover {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* ===============================
-   Card style
-================================= */
+/* --- Location Card --- */
 .location-card {
   width: 100%;
   background: #fff8f0;
-  border-radius: 0.5rem;
+  border-radius: 16px;
   overflow: hidden;
   text-align: center;
   padding: 1rem;
   margin-bottom: 1vh;
-  border: 2px solid #d9c1b3;
-  box-shadow: 4px 4px 0px #a67c52; /* pixel-style shadow */
-  image-rendering: pixelated; /* makes images crisp/pixel retro */
+  box-shadow: 6px 6px 0 #8b6e5f;
+  border: 2px solid #f2a6a0;
+  image-rendering: pixelated;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  h3 {
+    margin: 0.5rem 0;
+    font-size: 14px;
+    color: #4b3b2a;
+  }
+
+  p {
+    margin: 0.25rem 0;
+    font-size: 10px;
+    color: #6b4f3c;
+  }
 }
 
 .location-card img {
   width: 100%;
-  height: 150px;
+  height: 160px;
   object-fit: cover;
-  image-rendering: pixelated; /* pixelated images */
-  border-bottom: 2px solid #d9c1b3;
+  image-rendering: pixelated;
+  border-bottom: 2px solid #f2a6a0;
+  border-radius: 12px 12px 0 0;
 }
 
-/* ===============================
-   Text inside cards
-================================= */
-.location-card h3 {
-  font-family: "Press Start 2P", sans-serif;
-  color: #6b4f3c;
-  margin: 0.5rem 0;
-  font-size: 14px;
+/* --- Hover Effect --- */
+.location-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 8px 8px 0 #8b6e5f;
 }
 
-.location-card p {
-  font-family: "Press Start 2P", sans-serif;
-  color: #8b6e5f;
+/* --- Saved Message --- */
+.cards p {
   font-size: 12px;
-  margin: 0;
-}
-
-/* ===============================
-   Optional pixel overlay effect
-================================= */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGD4DwABBAEAf96N/wAAAABJRU5ErkJggg=='); 
-  opacity: 0.05;
-  pointer-events: none;
+  color: #4b3b2a;
 }
