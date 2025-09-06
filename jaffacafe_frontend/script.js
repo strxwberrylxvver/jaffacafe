@@ -1,8 +1,6 @@
-const apiKey = "AIzaSyCf-duGxI_5sjkp7B7jhr784RtlyWaB5Jg";
-const useProxy = true;
-const proxy = "https://cors-anywhere.herokuapp.com";
+const BACKEND_URL = "http://localhost:5000/api/cafes"; // change when deployed
 
-// Adding Geolocation functionality
+// Get location (with caching)
 function getLocation() {
   const cache = JSON.parse(localStorage.getItem("cachedLocation") || "{}");
   const now = Date.now();
@@ -15,39 +13,31 @@ function getLocation() {
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
 
-        localStorage.setItem(
-          "cachedLocation",
-          JSON.stringify({ lat, lng, timestamp: now })
-        );
+        localStorage.setItem("cachedLocation", JSON.stringify({ lat, lng, timestamp: now }));
         useLocation(lat, lng);
       },
       () => alert("Location access denied or unavailable.")
     );
   }
+}
 
-  // API call
-  async function useLocation(lat, lng) {
-    const endpoint = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=cafe&key=${apiKey}`;
-    const url = useProxy ? proxy + "/" + endpoint : endpoint;
-    try {
-      const response = await fetch(url);
-      console.log(url);
-      console.log(response);
-      const data = await response.json();
-      console.log(data);
-      if (data.results) {
-        displayCards(data.results);
-      } else {
-        alert("No cafes found.");
-      }
-    } catch (e) {
-      console.error("Error fetching Places API:", e);
-      alert("Error fetching cafes.");
+// Call backend for cafes
+async function useLocation(lat, lng) {
+  try {
+    const response = await fetch(`${BACKEND_URL}?lat=${lat}&lng=${lng}`);
+    const data = await response.json();
+    if (data.results) {
+      displayCards(data.results);
+    } else {
+      alert("No cafes found.");
     }
+  } catch (e) {
+    console.error("Error fetching cafes:", e);
+    alert("Error fetching cafes.");
   }
 }
 
-// UI and Animations part
+// Display cards with swipe
 function displayCards(cafes) {
   const container = document.querySelector(".cards");
   container.innerHTML = "";
@@ -60,21 +50,17 @@ function displayCards(cafes) {
     const card = document.createElement("div");
     card.className = "location-card";
 
-    const imgUrl = cafe.photos?.[0]?.photo_reference
-      ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cafe.photos[0].photo_reference}&key=${apiKey}`
-      : "https://via.placeholder.com/250x150?text=No+Image";
-
     const cafeData = {
       name: cafe.name,
       place_id: cafe.place_id,
-      photo: imgUrl,
-      rating: cafe.rating || "N/A",
+      photo: cafe.photo,
+      rating: cafe.rating,
     };
 
     card.innerHTML = `
-      <img src="${imgUrl}" alt="${cafe.name}" />
+      <img src="${cafe.photo}" alt="${cafe.name}" />
       <h3>${cafe.name}</h3>
-      <p>⭐️ Rating: ${cafe.rating || "N/A"}</p>
+      <p>⭐️ Rating: ${cafe.rating}</p>
       <p><small>Swipe right to save 💖</small></p>
     `;
 
@@ -96,7 +82,7 @@ function displayCards(cafes) {
   });
 }
 
-// Saving Cafes
+// Save cafes locally
 function saveCafe(cafeJSON) {
   const cafe = JSON.parse(cafeJSON);
   let saved = JSON.parse(localStorage.getItem("savedCafes") || "[]");

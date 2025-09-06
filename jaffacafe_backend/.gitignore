@@ -1,0 +1,5 @@
+# Don't upload API keys
+.env
+
+# Node.js stuff
+node_modules/
