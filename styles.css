@@ -1,28 +1,51 @@
+/* ===============================
+   Body & Fonts
+================================= */
 body {
-  background-color: rgb(153, 107, 87);
-  font-family: "Savate", sans-serif;
+  background: linear-gradient(135deg, #f9e0d9, #d9c1b3); /* soft pastel gradient */
+  font-family: "Press Start 2P", "Savate", sans-serif; /* retro pixel font */
   text-align: center;
-  padding: 1rem;
+  padding: 2rem;
+  color: #4b3b2a;
 }
 
+/* ===============================
+   Buttons
+================================= */
 button {
-  font-family: "Mono", sans-serif;
-  font-size: 20px;
-  background-color: rgb(85, 54, 36);
-  color: white;
-  border-radius: 10vw;
-  padding: 1vw;
-  outline-style: none;
-  border: none;
+  font-family: "Press Start 2P", "Mono", sans-serif;
+  font-size: 16px;
+  background: linear-gradient(135deg, #a67c52, #c99c7f);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  outline: none;
+  border: 2px solid #8b6e5f;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #8b6e5f; /* retro block shadow */
+  transition: all 0.2s ease-in-out;
 }
 
+button:hover {
+  background: linear-gradient(135deg, #c99c7f, #a67c52);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #8b6e5f;
+}
+
+/* ===============================
+   Cards container
+================================= */
 .cards {
   position: relative;
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   margin: 2rem auto;
-  height: 400px;
+  height: 420px;
 }
+
+/* ===============================
+   Swipe wrapper
+================================= */
 .swipe-wrapper {
   position: absolute;
   top: 0;
@@ -30,21 +53,59 @@ button {
   width: 100%;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+/* ===============================
+   Card style
+================================= */
 .location-card {
   width: 100%;
-  background: white;
-  border-radius: 10px;
+  background: #fff8f0;
+  border-radius: 0.5rem;
   overflow: hidden;
   text-align: center;
   padding: 1rem;
   margin-bottom: 1vh;
+  border: 2px solid #d9c1b3;
+  box-shadow: 4px 4px 0px #a67c52; /* pixel-style shadow */
+  image-rendering: pixelated; /* makes images crisp/pixel retro */
 }
+
 .location-card img {
   width: 100%;
   height: 150px;
   object-fit: cover;
+  image-rendering: pixelated; /* pixelated images */
+  border-bottom: 2px solid #d9c1b3;
 }
 
-button:hover {
-  background: #555;
+/* ===============================
+   Text inside cards
+================================= */
+.location-card h3 {
+  font-family: "Press Start 2P", sans-serif;
+  color: #6b4f3c;
+  margin: 0.5rem 0;
+  font-size: 14px;
+}
+
+.location-card p {
+  font-family: "Press Start 2P", sans-serif;
+  color: #8b6e5f;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* ===============================
+   Optional pixel overlay effect
+================================= */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGD4DwABBAEAf96N/wAAAABJRU5ErkJggg=='); 
+  opacity: 0.05;
+  pointer-events: none;
 }
