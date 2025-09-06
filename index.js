@@ -11,7 +11,7 @@ const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 
 // Allow frontend (GitHub Pages) to call backend
 app.use(cors({
-  origin: ["https://<your-github-username>.github.io", "http://localhost:5500"], // adjust if needed
+  origin: ["https://strxwberrylxvver.github.io", "https://strxwberrylxvver.github.io/jaffacafe/"], // adjust if needed
 }));
 
 app.get("/api/cafes", async (req, res) => {
